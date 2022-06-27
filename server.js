@@ -47,11 +47,16 @@ app.get('/employees-territories/:id', async (req, res) => {
     JOIN Territories AS t ON et.TerritoryID = t.TerritoryID
     WHERE e.EmployeeID = ${id}	
 	`);
-	const obj = {
-		name: records[0].firstName + ' ' + records[0].lastName,
-		territories: records.map(m => m.territory)
-	};
+    const obj = {
+        name: records[0].firstName + ' ' + records[0].lastName,
+        territories: records.map((m) => m.territory)
+    };
     res.send(obj);
+});
+
+app.get('/notes', async (req, res) => {
+    const notes = await qsql.getRecordsWithSql('SELECT * FROM Notes');
+    res.send(notes);
 });
 
 app.listen(port, () => {
