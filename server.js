@@ -19,6 +19,18 @@ app.get('/', (req, res) => {
     `);
 });
 
+app.get('/employees', (req, res) => {
+	const employees = [
+		{
+			name: 'employee #1'
+		},
+		{
+			name: 'employee #2'
+		}
+	];
+	res.send(employees);
+});
+
 app.listen(port, () => {
     console.log(`listening on http://localhost:${port}`);
 });
