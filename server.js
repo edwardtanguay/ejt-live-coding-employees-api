@@ -1,4 +1,5 @@
 import express from 'express';
+import * as qsql from './qtools/qsql.js';
 
 const app = express();
 const port = 3334;
@@ -19,15 +20,8 @@ app.get('/', (req, res) => {
     `);
 });
 
-app.get('/employees', (req, res) => {
-	const employees = [
-		{
-			name: 'employee #1'
-		},
-		{
-			name: 'employee #2'
-		}
-	];
+app.get('/employees', async (req, res) => {
+	const employees = await qsql.getRecordsWithSql('SELECT * FROM Employees');
 	res.send(employees);
 });
 
